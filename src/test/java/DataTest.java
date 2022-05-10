@@ -57,9 +57,13 @@ public class DataTest {
     }
 
     @Test
-    public void saveTableTest() throws IOException {
+    public void saveTableTest() {
         String saveFile = "testout.yaml";
-        Files.delete(Paths.get(saveFile));
+        try {
+            Files.delete(Paths.get(saveFile));
+        } catch (IOException e) {
+
+        }
         ServoTable testTable= new ServoTable();
         Random rand = new Random();
         for(int tel=0;tel<100;tel++){
@@ -73,9 +77,13 @@ public class DataTest {
     }
 
     @Test
-    public void saveAndLoadTableTest() throws IOException {
+    public void saveAndLoadTableTest() {
         String saveFile = "testout.yaml";
-        Files.delete(Paths.get(saveFile));
+        try {
+            Files.delete(Paths.get(saveFile));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         ServoTable testTable= new ServoTable();
         Random rand = new Random();
         for(int tel=0;tel<100;tel++){
