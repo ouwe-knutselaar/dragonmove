@@ -1,0 +1,26 @@
+interval: 2
+movementDir: /opt/dragon
+
+servos:
+  - name: jaw
+    number: 0
+    min: 150
+    rest: 300
+    max: 300
+  - name: nekturn
+    number: 1
+    min: 100
+    rest: 300
+    max: 500
+  - name: nekleft
+    number: 2
+    min: 100
+    rest: 300
+    max: 500
+  - name: nekright
+    number: 3
+    min: 100
+    rest: 300
+    max: 500
+
+
