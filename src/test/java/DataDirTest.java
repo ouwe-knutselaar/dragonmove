@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DataDirTest {
 
     @Test
-    public void checkConfigFileLoad(){
+    public void checkConfigFileLoadTest(){
         Config config = ConfigRead.readConfig();
         assertEquals(config.getDataDir(),"/opt/dragon");
         assertEquals(config.getInterval(),20);

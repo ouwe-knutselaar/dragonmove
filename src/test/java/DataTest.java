@@ -29,7 +29,7 @@ public class DataTest {
     }
 
     @Test
-    public void fillTableUp(){
+    public void fillTableUpTest(){
         ServoTable testTable= new ServoTable();
         Random rand = new Random();
         for(int tel=0;tel<100;tel++){
@@ -43,7 +43,7 @@ public class DataTest {
     }
 
     @Test
-    public void testDump() throws JsonProcessingException {
+    public void dumpTest() throws JsonProcessingException {
         ServoTable testTable= new ServoTable();
         Random rand = new Random();
         for(int tel=0;tel<100;tel++){
@@ -57,7 +57,7 @@ public class DataTest {
     }
 
     @Test
-    public void saveTable() throws IOException {
+    public void saveTableTest() throws IOException {
         String saveFile = "/home/gebruiker/IdeaProjects/dragonmove/src/test/resources/testout.yaml";
         Files.delete(Paths.get(saveFile));
         ServoTable testTable= new ServoTable();
@@ -73,7 +73,7 @@ public class DataTest {
     }
 
     @Test
-    public void saveAndLoadTable() throws IOException {
+    public void saveAndLoadTableTest() throws IOException {
         String saveFile = "/home/gebruiker/IdeaProjects/dragonmove/src/test/resources/testout.yaml";
         Files.delete(Paths.get(saveFile));
         ServoTable testTable= new ServoTable();

@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MoveTest {
 
     @Test
-    public void makeSingleMove() {
+    public void makeSingleMoveTest() {
         Random rand = new Random();
         for (int tel = 0; tel < 1000; tel++) {
             int target = rand.nextInt(4096);
@@ -24,7 +24,7 @@ public class MoveTest {
     }
 
     @Test
-    public void addMoveToTable() {
+    public void addMoveToTableTest() {
         ServoTable testTable = new ServoTable();
         Random rand = new Random();
         for (int tel = 0; tel < 10; tel++) {
@@ -51,7 +51,7 @@ public class MoveTest {
     }
 
     @Test
-    public void HeadOnlyMovementTestGetTable(){
+    public void HeadOnlyMovementTestGetTableTest(){
         Config config = ConfigRead.readConfig();
         HeadOnlyMove headOnlyMove = new HeadOnlyMove(config);
         int nekturnNewPos = config.getServoByName("nekturn").getNewRandomPosition();
@@ -68,7 +68,7 @@ public class MoveTest {
     }
 
     @Test
-    public void HeadOnlyMovementTestExecuteRun(){
+    public void HeadOnlyMovementExecuteRunTest(){
         Config config = ConfigRead.readConfig();
         HeadOnlyMove headOnlyMove = new HeadOnlyMove(config);
 

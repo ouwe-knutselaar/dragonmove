@@ -32,7 +32,7 @@ public class ExecutorTest {
     }
 
     @Test
-    public void runThreadTestWithBreak(){
+    public void runThreadTestWithBreaTest(){
         Config config = ConfigRead.readConfig();
         ServoTable testTable= new ServoTable();
         Random rand = new Random();
