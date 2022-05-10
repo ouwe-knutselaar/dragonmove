@@ -58,7 +58,7 @@ public class DataTest {
 
     @Test
     public void saveTableTest() throws IOException {
-        String saveFile = "/home/gebruiker/IdeaProjects/dragonmove/src/test/resources/testout.yaml";
+        String saveFile = "testout.yaml";
         Files.delete(Paths.get(saveFile));
         ServoTable testTable= new ServoTable();
         Random rand = new Random();
@@ -74,7 +74,7 @@ public class DataTest {
 
     @Test
     public void saveAndLoadTableTest() throws IOException {
-        String saveFile = "/home/gebruiker/IdeaProjects/dragonmove/src/test/resources/testout.yaml";
+        String saveFile = "testout.yaml";
         Files.delete(Paths.get(saveFile));
         ServoTable testTable= new ServoTable();
         Random rand = new Random();
