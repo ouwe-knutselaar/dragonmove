@@ -17,8 +17,8 @@ public class MoveTest {
         for (int tel = 0; tel < 1000; tel++) {
             int target = rand.nextInt(4096);
             int test[] = ServoMove.makeMove(2048, target, 100);
-            assertEquals(100, test.length);
-            assertEquals(target, test[99]);
+            assertEquals(100, test.length,"Size of the move is correct");
+            assertEquals(target, test[99],"Values of the move is equal");
             //System.out.println("c:" + tel + "\ttarget " + target + "\tresult " + test[99] + "\tprev " + test[98]);
         }
     }
