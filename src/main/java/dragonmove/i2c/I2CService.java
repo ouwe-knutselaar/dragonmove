@@ -169,6 +169,15 @@ public class I2CService {
 		}
 	}
 
+	public int readSingleLed(int ledNumber){
+		try {
+			return i2cdev.read(ledNumber);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+
 	public boolean isDemoMode() {
 		return demoMode;
 	}

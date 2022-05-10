@@ -11,7 +11,15 @@ public class I2Ctest {
     @Test
     public void I2cConnect(){
         I2CService i2CService = new I2CService(config);
-        assertEquals(false,i2CService.isDemoMode());
+        assertEquals(false,i2CService.isDemoMode(),"I2C connection successfull");
+    }
+
+
+    @Test
+    public void i2cServireadWrite(){
+        I2CService i2CService = new I2CService(config);
+        i2CService.writeSingleLed(10,2000);
+        assertEquals(2000,i2CService.readSingleLed(10),"Read Write test successfull");
     }
 
 }
