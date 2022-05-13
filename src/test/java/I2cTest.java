@@ -19,9 +19,15 @@ public class I2cTest {
     @Test
     public void i2cServireadWriteTest(){
         I2CService i2CService = new I2CService(config);
+        if(i2CService.isDemoMode()){
+            fail("No I2C device available");
+            return;
+        }
         i2CService.init(50);
         i2CService.writeSingleLed(10,2000);
-        assertEquals(2000,i2CService.readSingleLed(10),"Read Write test successfull");
+        int readedValue = i2CService.readSingleLed(10);
+        System.out.println("Read LED value is "+readedValue);
+        assertEquals(2000,readedValue,"Read Write test successfull");
     }
 
 }
