@@ -171,8 +171,8 @@ public class I2CService {
 
 	public int readSingleLed(int ledNumber){
 		try {
-			int valueLow = i2cdev.read(6+(4*ledNumber));
-			int valueHigh = i2cdev.read(7+(4*ledNumber));
+			byte valueLow = (byte)i2cdev.read(6+(4*ledNumber));
+			byte valueHigh = (byte) i2cdev.read(7+(4*ledNumber));
 			return (256*valueHigh) + valueLow;
 		} catch (IOException e) {
 			e.printStackTrace();
