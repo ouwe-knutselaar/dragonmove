@@ -6,6 +6,7 @@ public class ConfigRead {
         String os = System.getProperty("os.name");
         String configfile = "/opt/dragonmove/src/test/resources/testconfig.yaml";
         if(os.startsWith("Windows")){
+            System.out.println("It is a windows system");
             configfile= "D:\\erwin\\dragonmove\\src\\test\\resources\\testconfig.yaml";
         }
         return new Config(configfile);

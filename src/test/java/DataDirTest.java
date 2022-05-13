@@ -9,7 +9,7 @@ public class DataDirTest {
     public void checkConfigFileLoadTest(){
         Config config = ConfigRead.readConfig();
         assertEquals(config.getDataDir(),"/opt/dragon");
-        assertEquals(config.getInterval(),20);
+        assertEquals(config.getInterval(),2);
     }
 
 

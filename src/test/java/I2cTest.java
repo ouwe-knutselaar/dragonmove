@@ -24,7 +24,8 @@ public class I2cTest {
             return;
         }
         i2CService.init(50);
-        i2CService.writeSingleLed(10,2000);
+        i2CService.writeSingleLed(10,20);
+        i2CService.dumpPCA9685();
         int readedValue = i2CService.readSingleLed(10);
         System.out.println("Read LED value is "+readedValue);
         assertEquals(2000,readedValue,"Read Write test successfull");
