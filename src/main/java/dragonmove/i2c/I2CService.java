@@ -160,7 +160,7 @@ public class I2CService {
 			log.info("ALLCALLADR "+Integer.toBinaryString(result[5])+" "+result[5]);
 
 			for(int tel =0 ;tel <16 ;tel++){
-				log.info("LED"+tel+"\t"+result[6+(tel*4)]+" "+result[7+(tel*4)]+" "+result[8+(tel*4)]+" "+result[9+(tel*4)]+" ");
+				log.info(" LED"+tel+"\t"+result[6+(tel*4)]+" "+result[7+(tel*4)]+" "+result[8+(tel*4)]+" "+result[9+(tel*4)]+" ");
 			}
 
 		} catch (IOException e) {
@@ -171,7 +171,9 @@ public class I2CService {
 
 	public int readSingleLed(int ledNumber){
 		try {
-			return i2cdev.read(ledNumber);
+			int valueLow = i2cdev.read(6+(4*ledNumber));
+			int valueHigh = i2cdev.read(7+(4*ledNumber));
+			return (256*valueHigh) + valueLow;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

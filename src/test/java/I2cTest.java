@@ -25,10 +25,17 @@ public class I2cTest {
         }
         i2CService.init(50);
         i2CService.writeSingleLed(10,20);
+        i2CService.writeSingleLed(11,2000);
         i2CService.dumpPCA9685();
+
         int readedValue = i2CService.readSingleLed(10);
-        System.out.println("Read LED value is "+readedValue);
-        assertEquals(2000,readedValue,"Read Write test successfull");
+        System.out.println("Read LED 10 value is "+readedValue);
+        assertEquals(20,readedValue,"Read Write test LED 10 successfull");
+
+        readedValue = i2CService.readSingleLed(10);
+        System.out.println("Read LED 11 value is "+readedValue);
+        assertEquals(2000,readedValue,"Read Write test LED 11 successfull");
+
     }
 
 }
