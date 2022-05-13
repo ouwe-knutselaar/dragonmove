@@ -182,7 +182,7 @@ public class I2CService {
 			if(valueLow<0)valueLow+=128;
 			long valueHigh = i2cdev.read(9+(4*ledNumber));
 			if(valueHigh<0)valueHigh+=128;
-			log.info("valueLow is "+valueLow+"  valueHigh"+valueHigh);
+			log.info("valueLow is "+valueLow+"  valueHigh "+valueHigh);
 			return (int)((256*valueHigh) + valueLow);
 		} catch (IOException e) {
 			e.printStackTrace();
