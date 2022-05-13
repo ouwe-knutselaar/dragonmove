@@ -32,7 +32,7 @@ public class I2cTest {
         System.out.println("Read LED 10 value is "+readedValue);
         assertEquals(20,readedValue,"Read Write test LED 10 successfull");
 
-        readedValue = i2CService.readSingleLed(10);
+        readedValue = i2CService.readSingleLed(11);
         System.out.println("Read LED 11 value is "+readedValue);
         assertEquals(2000,readedValue,"Read Write test LED 11 successfull");
 

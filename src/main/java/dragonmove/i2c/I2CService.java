@@ -152,6 +152,9 @@ public class I2CService {
 		byte[] result=new byte[256];
 		try {
 			i2cdev.read(0,result,0,256);
+			for(int tel=0;tel<256;tel++){
+				if(result[tel]<0)result[tel]+=128;
+			}
 			log.info("MODE1      "+Integer.toBinaryString(result[0])+" "+result[0]);
 			log.info("MODE2      "+Integer.toBinaryString(result[1])+" "+result[1]);
 			log.info("SUBADR1    "+Integer.toBinaryString(result[2])+" "+result[2]);
@@ -161,10 +164,10 @@ public class I2CService {
 
 			for(int tel =0 ;tel <16 ;tel++){
 				log.info(" LED"+tel+"\t"
-						+Integer.toUnsignedLong(result[6+(tel*4)])+" "
-						+Integer.toUnsignedLong(result[7+(tel*4)])+" "
-						+Integer.toUnsignedLong(result[8+(tel*4)])+" "
-						+Integer.toUnsignedLong(+result[9+(tel*4)])+" ");
+						+result[6+(tel*4)]+" "
+						+result[7+(tel*4)]+" "
+						+result[8+(tel*4)]+" "
+						+result[9+(tel*4)]+" ");
 			}
 
 		} catch (IOException e) {
