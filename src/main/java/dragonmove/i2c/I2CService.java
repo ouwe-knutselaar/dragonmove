@@ -102,7 +102,7 @@ public class I2CService {
 			if(demoMode)return;
 			if(lednumber < SERVOMIN)throw new IllegalArgumentException("led or servo number cannot be less then 0");
 			if(lednumber > SERVOMAX)throw new IllegalArgumentException("led or servo number cannot be more then 15");
-			if(data < 0)throw new IllegalArgumentException("led or servo value cannot be more then 0");
+			if(data < 0)throw new IllegalArgumentException("led or servo value cannot be less then 0");
 			if(data > 4095)throw new IllegalArgumentException("led or servo value cannot be more then 4095");
 
         	byte[] result=new byte[4];
@@ -175,8 +175,10 @@ public class I2CService {
 
 	public int readSingleLed(int ledNumber){
 		try {
-			long valueLow = Integer.toUnsignedLong(i2cdev.read(6+(4*ledNumber)));
-			long valueHigh = Integer.toUnsignedLong(i2cdev.read(7+(4*ledNumber)));
+			long valueLow = i2cdev.read(8+(4*ledNumber));
+			if(valueLow<0)valueLow+=128;
+			long valueHigh = i2cdev.read(9+(4*ledNumber));
+			if(valueHigh<0)valueHigh+=128;
 			log.info("valueLow is "+valueLow+"  valueHigh"+valueHigh);
 			return (int)((256*valueHigh) + valueLow);
 		} catch (IOException e) {
