@@ -1,6 +1,12 @@
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import dragonmove.config.Config;
+import dragonmove.config.ConfigData;
 import dragonmove.i2c.I2CService;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,7 +46,10 @@ public class I2cTest {
 
 
     @Test
-    public void servoMoveTest() {
+    public void servoMoveTest() throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
+        ServotestConf configServoData=objectMapper.readValue(Paths.get(ConfigRead.readServoConfig()).toFile(), ServotestConf.class);
+        System.out.println(configServoData);
         I2CService i2CService = new I2CService(config);
         if (i2CService.isDemoMode()) {
             fail("No I2C device available");
@@ -49,17 +58,17 @@ public class I2cTest {
         i2CService.init(50);
         for (int servo = 0; servo < 15; servo++) {
             System.out.println("Servo "+servo);
-            for (int move = 150; move < 500; move += 5) {
+            for (int move = configServoData.getMin(); move < configServoData.getMax(); move +=configServoData.getStep()) {
 
                 i2CService.writeSingleLed(servo, move);
             }
-            delay(30);
+            delay(configServoData.getDelay());
 
-            for (int move = 500; move > 150; move -= 5) {
+            for (int move = configServoData.getMax(); move > configServoData.getMin(); move -= configServoData.getStep()) {
 
                 i2CService.writeSingleLed(servo, move);
             }
-            delay(30);
+            delay(configServoData.getDelay());
         }
     }
 

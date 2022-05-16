@@ -1,0 +1,4 @@
+delay: 50
+min: 150
+max: 500
+step: 5
