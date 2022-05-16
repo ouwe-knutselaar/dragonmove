@@ -82,7 +82,7 @@ public class DataTest {
         try {
             Files.delete(Paths.get(saveFile));
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("IO execption "+e.getMessage());
         }
         ServoTable testTable= new ServoTable();
         Random rand = new Random();

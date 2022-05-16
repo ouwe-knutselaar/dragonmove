@@ -47,16 +47,17 @@ public class I2cTest {
             return;
         }
         i2CService.init(50);
+        for (int servo = 0; servo < 15; servo++) {
+            for (int move = 150; move < 500; move += 5) {
 
-        for (int move = 150; move < 500; move++) {
-            for (int servo = 0; servo < 15; servo++) {
-                i2CService.writeSingleLed(servo,move);
+                i2CService.writeSingleLed(servo, move);
             }
             delay(30);
         }
-        for (int move = 500; move >150; move--) {
-            for (int servo = 0; servo < 15; servo++) {
-                i2CService.writeSingleLed(servo,move);
+        for (int servo = 0; servo < 15; servo++) {
+            for (int move = 500; move > 150; move -= 5) {
+
+                i2CService.writeSingleLed(servo, move);
             }
             delay(30);
         }
