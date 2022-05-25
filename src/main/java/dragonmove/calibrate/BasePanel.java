@@ -18,10 +18,14 @@ public abstract class BasePanel extends BasicWindow {
         setTitle(title);
         setHints(Collections.singletonList(Window.Hint.FULL_SCREEN));
 
-        closePanel.addListener(button -> close());
+        closePanel.addListener(button -> closePanel());
         panel.setLayoutManager(new GridLayout(columns));
 
         panel.addComponent(closePanel);
         setComponent(panel);
+    }
+
+    protected void closePanel(){
+        close();
     }
 }

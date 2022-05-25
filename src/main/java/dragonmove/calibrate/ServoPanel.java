@@ -10,8 +10,8 @@ import java.util.regex.Pattern;
 public class ServoPanel extends BasePanel {
 
     TextBox minVal = new TextBox();
-    TextBox maxVal = new TextBox(new TerminalSize(10,1));
-    TextBox restVal = new TextBox(new TerminalSize(10,1));
+    TextBox maxVal = new TextBox();
+    TextBox restVal = new TextBox();
     RadioBoxList<String> servoList = new RadioBoxList<>();
     RadioBoxList<String> actionList = new RadioBoxList<>();
     Pattern numberPattern = Pattern.compile("[0-9]*");
@@ -30,11 +30,14 @@ public class ServoPanel extends BasePanel {
         if(i2CService.isDemoMode())message.setText("I2C Demo mode");
 
         for(int tel=0;tel<15;tel++)servoList.addItem(config.getServoByNumber(tel).getName()+" "+tel);
-        //servoList.setSize(new TerminalSize(5,10));
-        servoList.setSelectedIndex(0);
+        servoList.setCheckedItemIndex(0);
+        minVal.setText(""+config.getServoByNumber(0).getMin());
+        maxVal.setText(""+config.getServoByNumber(0).getMax());
+        restVal.setText(""+config.getServoByNumber(0).getRest());
 
-        actionList.addItem("Min tot Max and back");
+        actionList.addItem("Move");
         actionList.addItem("To Rest");
+        actionList.setCheckedItemIndex(0);
 
         minVal.setValidationPattern(numberPattern);
         maxVal.setValidationPattern(numberPattern);
@@ -80,34 +83,40 @@ public class ServoPanel extends BasePanel {
 
     private void servoLoop(){
         loop = true;
-
         int servo = servoList.getCheckedItemIndex();
         int min = Integer.parseInt(minVal.getText());
         int max = Integer.parseInt(maxVal.getText());
-        int rest = Integer.parseInt(restVal.getText());
-        servoValue.setText("Start loop");
+        message.setText("Start loop");
         while(loop){
             for(int tel=min;tel<max;tel++){
                 i2CService.writeSingleLed(servo,tel);
                 servoValue.setText("Servo "+tel);
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                sleep(100);
+                if(!loop)break;
             }
             for(int tel=max;tel>min;tel--){
                 i2CService.writeSingleLed(servo,tel);
                 servoValue.setText("Servo "+tel);
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                sleep(100);
+                if(!loop)break;
             }
 
         }
-        servoValue.setText("loop stopped");
+        message.setText("loop stopped");
+    }
+
+    @Override
+    protected void closePanel(){
+        loop=false;
+        close();
+    }
+
+    private void sleep(int time){
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 }
