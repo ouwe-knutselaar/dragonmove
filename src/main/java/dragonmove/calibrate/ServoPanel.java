@@ -18,6 +18,7 @@ public class ServoPanel extends BasePanel {
     Button executeAction = new Button("Exec action");
     Button stopAction = new Button("Stop action");
     Label servoValue = new Label("n/a");
+    Label message = new Label("no message");
     Config config;
     I2CService i2CService;
     boolean loop = false;
@@ -26,6 +27,7 @@ public class ServoPanel extends BasePanel {
         super("Servo Panel",3);
         this.config = config;
         i2CService = new I2CService(config);
+        if(i2CService.isDemoMode())message.setText("I2C Demo mode");
 
         for(int tel=0;tel<15;tel++)servoList.addItem(config.getServoByNumber(tel).getName()+" "+tel);
         //servoList.setSize(new TerminalSize(5,10));
@@ -45,8 +47,8 @@ public class ServoPanel extends BasePanel {
             @Override
             public void onSelectionChanged(int i, int i1) {
                 Servo servo = config.getServoByNumber(i);
-                maxVal.setText(""+servo.getMin());
-                minVal.setText(""+servo.getMax());
+                minVal.setText(""+servo.getMin());
+                maxVal.setText(""+servo.getMax());
                 restVal.setText(""+servo.getRest());
             }
         });
@@ -61,7 +63,7 @@ public class ServoPanel extends BasePanel {
         panel.inComponent(executeAction.withBorder(Borders.doubleLine("Execute")));
         panel.inComponent(stopAction.withBorder(Borders.doubleLine("Stop"))).inSpace();
 
-        panel.inText("Servo value").inComponent(servoValue).inSpace();
+        panel.inComponent(servoValue).inComponent(message).inSpace();
         servoList.takeFocus();
     }
 
@@ -87,7 +89,7 @@ public class ServoPanel extends BasePanel {
         while(loop){
             for(int tel=min;tel<max;tel++){
                 i2CService.writeSingleLed(servo,tel);
-                servoValue.setText(""+tel);
+                servoValue.setText("Servo "+tel);
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
@@ -96,7 +98,7 @@ public class ServoPanel extends BasePanel {
             }
             for(int tel=max;tel>min;tel--){
                 i2CService.writeSingleLed(servo,tel);
-                servoValue.setText(""+tel);
+                servoValue.setText("Servo "+tel);
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
