@@ -5,7 +5,6 @@ import com.googlecode.lanterna.gui2.*;
 import dragonmove.config.Config;
 import dragonmove.config.Servo;
 import dragonmove.i2c.I2CService;
-
 import java.util.regex.Pattern;
 
 public class ServoPanel extends BasePanel {

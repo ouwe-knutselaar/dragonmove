@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Servo {
 
-    private String name;
+    private String name="noname";
     private int number;
     private int min;
     private int rest;

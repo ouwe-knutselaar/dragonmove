@@ -27,7 +27,7 @@ public class Config {
 
             for(int tel=0;tel<16;tel++)servoList.add(new Servo());
             configData.getServos().forEach(servo -> servoList.set(servo.getNumber(),servo));
-            dumpConfig();
+            //dumpConfig();
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);

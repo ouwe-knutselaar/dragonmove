@@ -1,8 +1,8 @@
 interval: 20
 movementDir: /opt/dragon
 
-# INFO, DEBUG, TRACE
-debug: DEBUG
+# INFO, DEBUG, TRACE, OFF
+debug: OFF
 
 servos:
   - name: jaw
