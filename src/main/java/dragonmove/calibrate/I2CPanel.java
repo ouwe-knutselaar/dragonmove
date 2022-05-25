@@ -9,6 +9,7 @@ public class I2CPanel extends BasePanel{
         super("I2C Panel", 3);
 
         I2CService i2CService = new I2CService(config);
+        panel.inText("I2C in demo mode").inText(""+i2CService.isDemoMode()).inSpace();
         for(int tel = 0 ;tel < 16;tel++) {
             panel.inText("Servo "+tel).
                     inText(" value is "+ i2CService.readSingleLed(tel)).

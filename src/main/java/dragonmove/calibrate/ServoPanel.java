@@ -12,6 +12,7 @@ public class ServoPanel extends BasePanel {
     TextBox minVal = new TextBox();
     TextBox maxVal = new TextBox();
     TextBox restVal = new TextBox();
+    TextBox servoStep = new TextBox("1");
     RadioBoxList<String> servoList = new RadioBoxList<>();
     RadioBoxList<String> actionList = new RadioBoxList<>();
     Pattern numberPattern = Pattern.compile("[0-9]*");
@@ -42,6 +43,7 @@ public class ServoPanel extends BasePanel {
         minVal.setValidationPattern(numberPattern);
         maxVal.setValidationPattern(numberPattern);
         restVal.setValidationPattern(numberPattern);
+        servoStep.setValidationPattern(numberPattern);
 
         executeAction.addListener(button -> servoThread());
         stopAction.addListener(button -> loop=false);
@@ -61,12 +63,14 @@ public class ServoPanel extends BasePanel {
         panel.inComponent(restVal.withBorder(Borders.singleLine("default")));
 
         panel.inComponent(servoList.withBorder(Borders.singleLine("Servo List")).setPreferredSize(new TerminalSize(20,8)));
-        panel.inComponent(actionList.withBorder(Borders.singleLine("Action List"))).inSpace();
-
-        panel.inComponent(executeAction.withBorder(Borders.doubleLine("Execute")));
-        panel.inComponent(stopAction.withBorder(Borders.doubleLine("Stop"))).inSpace();
+        panel.inComponent(actionList.withBorder(Borders.singleLine("Action List")));
+        panel.inComponent(servoStep.withBorder(Borders.singleLine("servoStep")));
 
         panel.inComponent(servoValue).inComponent(message).inSpace();
+
+        panel.inComponent(executeAction);
+        panel.inComponent(stopAction).inSpace();
+
         servoList.takeFocus();
     }
 
@@ -86,15 +90,16 @@ public class ServoPanel extends BasePanel {
         int servo = servoList.getCheckedItemIndex();
         int min = Integer.parseInt(minVal.getText());
         int max = Integer.parseInt(maxVal.getText());
+        int step = Integer.parseInt(servoStep.getText());
         message.setText("Start loop");
         while(loop){
-            for(int tel=min;tel<max;tel++){
+            for(int tel=min;tel<max;tel=tel+step){
                 i2CService.writeSingleLed(servo,tel);
                 servoValue.setText("Servo "+tel);
                 sleep(100);
                 if(!loop)break;
             }
-            for(int tel=max;tel>min;tel--){
+            for(int tel=max;tel>min;tel=tel-step){
                 i2CService.writeSingleLed(servo,tel);
                 servoValue.setText("Servo "+tel);
                 sleep(100);
