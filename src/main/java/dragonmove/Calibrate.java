@@ -29,7 +29,7 @@ public class Calibrate {
         MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
 
         screen.startScreen();
-        gui.addWindowAndWait(new MainPanel(terminal.getTerminalSize(),config));
+        gui.addWindowAndWait(new MainPanel(config));
         screen.stopScreen();
     }
 

@@ -13,9 +13,9 @@ public class MainPanel extends BasePanel {
     Button servoButton = new Button("Servo");
     Config config;
 
-    public MainPanel(TerminalSize terminalSize, Config config){
+    public MainPanel(Config config){
 
-        super("Main Panel",2,terminalSize);
+        super("Main Panel",2);
         this.config = config;
 
         interval.setText(""+config.getInterval());
@@ -30,14 +30,15 @@ public class MainPanel extends BasePanel {
 
         servoButton.addListener(button -> openServoWindow());
         i2cButton.addListener(button -> openI2CWindow(config));
+        configButton.takeFocus();
     }
 
     private void openI2CWindow(Config config) {
-        getTextGUI().addWindowAndWait(new I2CPanel(getTextGUI().getScreen().getTerminalSize(),config));
+        getTextGUI().addWindowAndWait(new I2CPanel(config));
     }
 
     private void openServoWindow(){
-        getTextGUI().addWindowAndWait(new ServoPanel(getTextGUI().getScreen().getTerminalSize(),config));
+        getTextGUI().addWindowAndWait(new ServoPanel(config));
     }
 
 }

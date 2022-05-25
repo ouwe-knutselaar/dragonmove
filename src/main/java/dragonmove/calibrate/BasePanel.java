@@ -4,6 +4,9 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.BasicWindow;
 import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.GridLayout;
+import com.googlecode.lanterna.gui2.Window;
+
+import java.util.Collections;
 
 public abstract class BasePanel extends BasicWindow {
 
@@ -11,9 +14,9 @@ public abstract class BasePanel extends BasicWindow {
     Button closePanel = new Button("close");
 
 
-    public BasePanel(String title, int columns, TerminalSize terminalSize){
+    public BasePanel(String title, int columns){
         setTitle(title);
-        setFixedSize(terminalSize);
+        setHints(Collections.singletonList(Window.Hint.FULL_SCREEN));
 
         closePanel.addListener(button -> close());
         panel.setLayoutManager(new GridLayout(columns));

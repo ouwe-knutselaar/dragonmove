@@ -177,6 +177,7 @@ public class I2CService {
 	}
 
 	public int readSingleLed(int ledNumber){
+		if(demoMode)return 0;
 		try {
 			long valueLow = i2cdev.read(8+(4*ledNumber));
 			if(valueLow<0)valueLow+=128;

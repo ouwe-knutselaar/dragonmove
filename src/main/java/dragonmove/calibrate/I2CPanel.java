@@ -8,12 +8,12 @@ public class I2CPanel extends BasePanel{
 
 
 
-    public I2CPanel(TerminalSize terminalSize, Config config) {
-        super("I2C Panel", 3, terminalSize);
+    public I2CPanel( Config config) {
+        super("I2C Panel", 3);
 
         I2CService i2CService = new I2CService(config);
         for(int tel = 0 ;tel < 16;tel++) {
-            panel.inText("Servo "+tel+ " value is "+ i2CService.readSingleLed(tel));
+            panel.inText("Servo "+tel).inText(" value is "+ i2CService.readSingleLed(tel)).inSpace();
         }
     }
 }
