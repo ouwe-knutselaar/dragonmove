@@ -29,6 +29,11 @@ public class MainPanel extends BasePanel {
         panel.inComponent(servoButton).inSpace().inSpace().inSpace();
 
         servoButton.addListener(button -> openServoWindow());
+        i2cButton.addListener(button -> openI2CWindow(config));
+    }
+
+    private void openI2CWindow(Config config) {
+        getTextGUI().addWindowAndWait(new I2CPanel(getTextGUI().getScreen().getTerminalSize(),config));
     }
 
     private void openServoWindow(){
