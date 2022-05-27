@@ -1,17 +1,16 @@
 package dragonmove.config;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 public class Config {
 
@@ -22,7 +21,7 @@ public class Config {
 
     public Config(String configFile){
         try {
-            ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
+            ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory().disable(JsonParser.Feature.IGNORE_UNDEFINED));
             configData=objectMapper.readValue(Paths.get(configFile).toFile(),ConfigData.class);
 
             for(int tel=0;tel<16;tel++)servoList.add(new Servo());
@@ -32,6 +31,19 @@ public class Config {
             e.printStackTrace();
             System.exit(1);
         }
+    }
+
+    public boolean saveConfig(String configFile){
+        try {
+            configData.getServos().clear();
+            configData.getServos().addAll(servoList);
+            ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
+            objectMapper.writeValue(new File(configFile),configData);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     public  int getInterval(){

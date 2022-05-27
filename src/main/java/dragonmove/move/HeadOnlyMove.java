@@ -28,9 +28,9 @@ public class HeadOnlyMove {
 
     public ServoTable makeNewMovement(){
         log.info("New random head movement");
-        int nekturnNewPos = config.getServoByName("nekturn").getNewRandomPosition();
-        int nekleftNewPos = config.getServoByName("nekleft").getNewRandomPosition();
-        int nekrightNewPos = config.getServoByName("nekright").getNewRandomPosition();
+        int nekturnNewPos = config.getServoByName("nekturn").generateNewRandomPosition();
+        int nekleftNewPos = config.getServoByName("nekleft").generateNewRandomPosition();
+        int nekrightNewPos = config.getServoByName("nekright").generateNewRandomPosition();
         return makeNewMovement(
                 nekturnNewPos,
                 nekleftNewPos,

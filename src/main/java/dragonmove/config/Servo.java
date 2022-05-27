@@ -11,6 +11,7 @@ public class Servo {
     private int max;
     private int currentPosition;
     private int newPosition;
+    private int newRandomPosition;
 
     public String getName() {
         return name;
@@ -69,6 +70,14 @@ public class Servo {
         this.newPosition = newPosition;
     }
 
+    public void setNewRandomPosition(int newRandomPosition) {
+        this.newRandomPosition = newRandomPosition;
+    }
+
+    public int getNewRandomPosition() {
+        return newRandomPosition;
+    }
+
     @Override
     public String toString() {
         return "Servo{" +
@@ -82,7 +91,7 @@ public class Servo {
                 '}';
     }
 
-    public int getNewRandomPosition(){
+    public int generateNewRandomPosition(){
         Random rand = new Random();
         return rand.nextInt(max-min)+min;
     }

@@ -54,9 +54,9 @@ public class MoveTest {
     public void HeadOnlyMovementTestGetTableTest(){
         Config config = ConfigRead.readConfig();
         HeadOnlyMove headOnlyMove = new HeadOnlyMove(config);
-        int nekturnNewPos = config.getServoByName("nekturn").getNewRandomPosition();
-        int nekleftNewPos = config.getServoByName("nekleft").getNewRandomPosition();
-        int nekrightNewPos = config.getServoByName("nekright").getNewRandomPosition();
+        int nekturnNewPos = config.getServoByName("nekturn").generateNewRandomPosition();
+        int nekleftNewPos = config.getServoByName("nekleft").generateNewRandomPosition();
+        int nekrightNewPos = config.getServoByName("nekright").generateNewRandomPosition();
         ServoTable testTable = headOnlyMove.makeNewMovement(
                 nekturnNewPos,
                 nekleftNewPos,
@@ -72,9 +72,9 @@ public class MoveTest {
         Config config = ConfigRead.readConfig();
         HeadOnlyMove headOnlyMove = new HeadOnlyMove(config);
 
-        int nekturnNewPos = config.getServoByName("nekturn").getNewRandomPosition();
-        int nekleftNewPos = config.getServoByName("nekleft").getNewRandomPosition();
-        int nekrightNewPos = config.getServoByName("nekright").getNewRandomPosition();
+        int nekturnNewPos = config.getServoByName("nekturn").generateNewRandomPosition();
+        int nekleftNewPos = config.getServoByName("nekleft").generateNewRandomPosition();
+        int nekrightNewPos = config.getServoByName("nekright").generateNewRandomPosition();
         ServoTable testTable = headOnlyMove.makeNewMovement(
                 nekturnNewPos,
                 nekleftNewPos,
@@ -86,9 +86,9 @@ public class MoveTest {
         log.info("nekturnNewPos:"+nekturnNewPos+" nekleftNewPos:"+nekleftNewPos+" nekrightNewPos:"+nekrightNewPos);
         for(int tel=0;tel<16;tel++)log.info(config.getServoByNumber(tel).toString());
 
-        nekturnNewPos = config.getServoByName("nekturn").getNewRandomPosition();
-        nekleftNewPos = config.getServoByName("nekleft").getNewRandomPosition();
-        nekrightNewPos = config.getServoByName("nekright").getNewRandomPosition();
+        nekturnNewPos = config.getServoByName("nekturn").generateNewRandomPosition();
+        nekleftNewPos = config.getServoByName("nekleft").generateNewRandomPosition();
+        nekrightNewPos = config.getServoByName("nekright").generateNewRandomPosition();
         testTable = headOnlyMove.makeNewMovement(
                 nekturnNewPos,
                 nekleftNewPos,

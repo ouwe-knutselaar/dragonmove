@@ -6,7 +6,7 @@ public class ConfigData {
     private  int interval;
     private String movementDir;
     private List<Servo> servos;
-    private String debug;
+    private String debug="INFO";
 
     public  int getInterval() {
         return interval;

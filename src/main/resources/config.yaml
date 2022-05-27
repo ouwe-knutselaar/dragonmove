@@ -1,49 +1,133 @@
-interval: 20
-movementDir: /opt/dragon
-
-# INFO, DEBUG, TRACE, OFF
-debug: OFF
-
+---
+interval: 2
+movementDir: "/opt/dragon"
 servos:
-  - name: jaw
-    number: 0
-    min: 150
-    rest: 300
-    max: 300
-  - name: nekturn
-    number: 1
-    min: 100
-    rest: 300
-    max: 500
-  - name: nekleft
-    number: 2
-    min: 100
-    rest: 300
-    max: 500
-  - name: nekright
-    number: 3
-    min: 100
-    rest: 300
-    max: 500
-  - name: tail
-    number: 4
-    min: 100
-    rest: 300
-    max: 500
-  - name: wingleft
-    number: 5
-    min: 100
-    rest: 300
-    max: 500
-  - name: wingright
-    number: 6
-    min: 100
-    rest: 300
-    max: 500
-  - name: eyes
-    number: 7
-    min: 100
-    rest: 300
-    max: 500
-
-
+- name: "noname"
+  number: 0
+  min: 0
+  rest: 0
+  max: 0
+  currentPosition: 0
+  newPosition: 0
+  newRandomPosition: 0
+- name: "nekturn"
+  number: 1
+  min: 100
+  rest: 300
+  max: 500
+  currentPosition: 300
+  newPosition: 0
+  newRandomPosition: 0
+- name: "nekleft"
+  number: 2
+  min: 100
+  rest: 300
+  max: 500
+  currentPosition: 300
+  newPosition: 0
+  newRandomPosition: 0
+- name: "nekright"
+  number: 3
+  min: 100
+  rest: 300
+  max: 500
+  currentPosition: 300
+  newPosition: 0
+  newRandomPosition: 0
+- name: "noname"
+  number: 0
+  min: 0
+  rest: 0
+  max: 0
+  currentPosition: 0
+  newPosition: 0
+  newRandomPosition: 0
+- name: "noname"
+  number: 0
+  min: 0
+  rest: 0
+  max: 0
+  currentPosition: 0
+  newPosition: 0
+  newRandomPosition: 0
+- name: "noname"
+  number: 0
+  min: 0
+  rest: 0
+  max: 0
+  currentPosition: 0
+  newPosition: 0
+  newRandomPosition: 0
+- name: "noname"
+  number: 0
+  min: 0
+  rest: 0
+  max: 0
+  currentPosition: 0
+  newPosition: 0
+  newRandomPosition: 0
+- name: "noname"
+  number: 0
+  min: 0
+  rest: 0
+  max: 0
+  currentPosition: 0
+  newPosition: 0
+  newRandomPosition: 0
+- name: "noname"
+  number: 0
+  min: 0
+  rest: 0
+  max: 0
+  currentPosition: 0
+  newPosition: 0
+  newRandomPosition: 0
+- name: "noname"
+  number: 0
+  min: 0
+  rest: 0
+  max: 0
+  currentPosition: 0
+  newPosition: 0
+  newRandomPosition: 0
+- name: "noname"
+  number: 0
+  min: 0
+  rest: 0
+  max: 0
+  currentPosition: 0
+  newPosition: 0
+  newRandomPosition: 0
+- name: "noname"
+  number: 0
+  min: 0
+  rest: 0
+  max: 0
+  currentPosition: 0
+  newPosition: 0
+  newRandomPosition: 0
+- name: "noname"
+  number: 0
+  min: 0
+  rest: 0
+  max: 0
+  currentPosition: 0
+  newPosition: 0
+  newRandomPosition: 0
+- name: "noname"
+  number: 0
+  min: 0
+  rest: 0
+  max: 0
+  currentPosition: 0
+  newPosition: 0
+  newRandomPosition: 0
+- name: "noname"
+  number: 0
+  min: 0
+  rest: 0
+  max: 0
+  currentPosition: 0
+  newPosition: 0
+  newRandomPosition: 0
+debug: "INFO"

@@ -14,7 +14,8 @@ import java.io.IOException;
 
 public class Calibrate {
 
-    Config config;
+    private Config config;
+    private static String configFileStore="empty";
 
     public static void main(String [] argv) throws IOException {
         if(argv.length == 0)throw new IllegalArgumentException("Missing config file as argument");
@@ -24,7 +25,7 @@ public class Calibrate {
 
     public void run(String configfile) throws IOException {
         config = new Config(configfile);
-
+        configFileStore = configfile;
         if(config.getDebug().equals("DEBUG"))config.setLevel(Level.DEBUG);
         if(config.getDebug().equals("TRACE"))config.setLevel(Level.TRACE);
         if(config.getDebug().equals("OFF"))config.setLevel(Level.OFF);
@@ -38,6 +39,10 @@ public class Calibrate {
         screen.startScreen();
         gui.addWindowAndWait(new MainPanel(config));
         screen.stopScreen();
+    }
+
+    public static String getConfigFileStore(){
+        return configFileStore;
     }
 
 }

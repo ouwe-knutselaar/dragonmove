@@ -1,6 +1,7 @@
 package dragonmove.calibrate;
 
 import com.googlecode.lanterna.gui2.*;
+import dragonmove.Calibrate;
 import dragonmove.config.Config;
 
 public class MainPanel extends BasePanel {
@@ -23,6 +24,7 @@ public class MainPanel extends BasePanel {
 
         panel.inText("Interval in mS ").inComponent(interval);
         panel.inText("Movement Directory ").inComponent(movementDir);
+        panel.inText("Config file: ").inText(Calibrate.getConfigFileStore());
         panel.inSpace().inSpace();
         panel.inComponent(configButton).inSpace();
         panel.inComponent(i2cButton).inSpace();

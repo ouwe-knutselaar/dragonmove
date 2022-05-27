@@ -1,11 +1,9 @@
 package dragonmove.calibrate;
 
-import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.BasicWindow;
 import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.GridLayout;
 import com.googlecode.lanterna.gui2.Window;
-
 import java.util.Collections;
 
 public abstract class BasePanel extends BasicWindow {

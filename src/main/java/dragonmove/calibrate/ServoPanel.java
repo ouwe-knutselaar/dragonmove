@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 public class ServoPanel extends BasePanel {
 
+    TextBox servoName = new TextBox();
     TextBox minVal = new TextBox();
     TextBox maxVal = new TextBox();
     TextBox restVal = new TextBox();
@@ -18,6 +19,7 @@ public class ServoPanel extends BasePanel {
     Pattern numberPattern = Pattern.compile("[0-9]*");
     Button executeAction = new Button("Exec action");
     Button stopAction = new Button("Stop action");
+    Button updateServo = new Button("update servo");
     Label servoValue = new Label("n/a");
     Label message = new Label("no message");
     Config config;
@@ -25,13 +27,14 @@ public class ServoPanel extends BasePanel {
     boolean loop = false;
 
     public ServoPanel(Config config){
-        super("Servo Panel",3);
+        super("Servo Panel",4);
         this.config = config;
         i2CService = new I2CService(config);
         if(i2CService.isDemoMode())message.setText("I2C Demo mode");
 
         for(int tel=0;tel<15;tel++)servoList.addItem(config.getServoByNumber(tel).getName()+" "+tel);
         servoList.setCheckedItemIndex(0);
+        servoName.setText(config.getServoByNumber(0).getName());
         minVal.setText(""+config.getServoByNumber(0).getMin());
         maxVal.setText(""+config.getServoByNumber(0).getMax());
         restVal.setText(""+config.getServoByNumber(0).getRest());
@@ -47,31 +50,49 @@ public class ServoPanel extends BasePanel {
 
         executeAction.addListener(button -> servoThread());
         stopAction.addListener(button -> loop=false);
+        updateServo.addListener(button -> updateServo(servoList.getCheckedItemIndex()));
 
         servoList.addListener(new RadioBoxList.Listener() {
             @Override
             public void onSelectionChanged(int i, int i1) {
-                Servo servo = config.getServoByNumber(i);
-                minVal.setText(""+servo.getMin());
-                maxVal.setText(""+servo.getMax());
-                restVal.setText(""+servo.getRest());
+                minVal.setText(""+config.getServoByNumber(i).getMin());
+                maxVal.setText(""+config.getServoByNumber(i).getMax());
+                restVal.setText(""+config.getServoByNumber(i).getRest());
+                servoName.setText(config.getServoByNumber(i).getName());
             }
         });
 
+        panel.inComponent(servoName.withBorder(Borders.singleLine("name")));
         panel.inComponent(minVal.withBorder(Borders.singleLine("minval")));
         panel.inComponent(maxVal.withBorder(Borders.singleLine("maxval")));
         panel.inComponent(restVal.withBorder(Borders.singleLine("default")));
 
         panel.inComponent(servoList.withBorder(Borders.singleLine("Servo List")).setPreferredSize(new TerminalSize(20,8)));
         panel.inComponent(actionList.withBorder(Borders.singleLine("Action List")));
-        panel.inComponent(servoStep.withBorder(Borders.singleLine("servoStep")));
+        panel.inComponent(servoStep.withBorder(Borders.singleLine("servoStep"))).inSpace();
 
-        panel.inComponent(servoValue).inComponent(message).inSpace();
+        panel.inComponent(servoValue.withBorder(Borders.singleLine("servo value")));
+        panel.inComponent(message.withBorder(Borders.singleLine("message"))).inSpace().inSpace();
 
         panel.inComponent(executeAction);
-        panel.inComponent(stopAction).inSpace();
+        panel.inComponent(stopAction);
+        panel.inComponent(updateServo).inSpace();
 
         servoList.takeFocus();
+    }
+
+    private void updateServo(int servoNumber) {
+
+        Servo servo = config.getServoByNumber(servoNumber);
+        servo.setName(servoName.getText());
+        servo.setMin(Integer.parseInt(minVal.getText()));
+        servo.setMax(Integer.parseInt(maxVal.getText()));
+        servo.setRest(Integer.parseInt(restVal.getText()));
+
+        servoList.clearItems();
+        for(int tel=0;tel<15;tel++)servoList.addItem(config.getServoByNumber(tel).getName()+" "+tel);
+        servoList.setCheckedItemIndex(servoNumber);
+
     }
 
     private void servoThread() {
@@ -91,7 +112,7 @@ public class ServoPanel extends BasePanel {
         int min = Integer.parseInt(minVal.getText());
         int max = Integer.parseInt(maxVal.getText());
         int step = Integer.parseInt(servoStep.getText());
-        message.setText("Start loop");
+        message.setText("Start loop servo "+servo);
         while(loop){
             for(int tel=min;tel<max;tel=tel+step){
                 i2CService.writeSingleLed(servo,tel);
@@ -107,7 +128,7 @@ public class ServoPanel extends BasePanel {
             }
 
         }
-        message.setText("loop stopped");
+        message.setText("loop stopped servo "+servo);
     }
 
     @Override
